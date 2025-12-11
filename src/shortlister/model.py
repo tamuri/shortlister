@@ -263,8 +263,11 @@ def extract_info_from_text(lines: List[str]):
     # removes header/footer and other irrelevant info
     applicant_info = lines[1:-5]
     
-    right_to_work_index = lines.index("Do you have the unrestricted right to work in the UK?")
-    right_to_work = lines[right_to_work_index:(right_to_work_index + 4)]
+    try:
+        right_to_work_index = lines.index("Do you have the unrestricted right to work in the UK?")
+        right_to_work = lines[right_to_work_index:(right_to_work_index + 4)]
+    except ValueError:
+        right_to_work = []
 
     # filter out the field name and retain only the info to applicant
     for label in labels:
